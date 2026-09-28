@@ -1,0 +1,36 @@
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+-- GUI
+local gui = Instance.new("ScreenGui")
+gui.Name = "AutoClickerUI"
+gui.ResetOnSpawn = false
+gui.Parent = player:WaitForChild("PlayerGui")
+
+-- Botão
+local button = Instance.new("TextButton")
+button.Name = "AutoClickButton"
+button.Size = UDim2.fromOffset(200, 60)
+button.Position = UDim2.new(0.5, -100, 0.8, 0)
+button.Text = "AUTO CLICK: OFF"
+button.TextSize = 20
+button.Parent = gui
+
+local ativo = false
+
+button.Activated:Connect(function()
+	ativo = not ativo
+	button.Text = ativo and "AUTO CLICK: ON" or "AUTO CLICK: OFF"
+
+	if ativo then
+		task.spawn(function()
+			while ativo do
+				-- Substitua esta linha pela função que realiza
+				-- o clique dentro do seu próprio jogo.
+				print("Clique!")
+
+				task.wait(0.1)
+			end
+		end)
+	end
+end)
